@@ -28,7 +28,7 @@ class DataStorage:
             cls.instance = super(DataStorage, cls).__new__(cls)
             cls.instance.experiments = {}
             cls.instance.patients = {}
-            cls.instance.data = {}
+            cls.instance.data = []
         return cls.instance
 
     def create_patient(self, name):
