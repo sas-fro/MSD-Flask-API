@@ -1,7 +1,7 @@
 '''
 Blub module doc string.
 '''
-
+import json
 import idgenerator
 
 
@@ -59,16 +59,36 @@ class DataStorage:
         '''
         return self.experiments
 
-    def add_data(self, patient_id, experiment_id, data):
+    def add_data(self, dataobj):
         '''
         Blub function doc string.
         '''
-        d_obj = DataPoint(patient_id, experiment_id, data)
-        self.data.append(d_obj)
+        self.data.append(dataobj)
 
     def store_data(self, filename):
         '''
         Blub function doc string.
         '''
         # store data into file
+        self.store(filename, self.data)
         self.data.clear()
+
+    def store_patients(self, filename):
+        '''
+        Blub function doc string.
+        '''
+        self.store(filename, self.patients)
+
+    def store_experiments(self, filename):
+        '''
+        Blub function doc string.
+        '''
+        self.store(filename, self.experiments)
+    
+    def store(self, filename, data):
+        '''
+        Blub function doc string.
+        '''
+        json_object = json.dumps(data, indent=4)
+        with open(filename + ".json", "w") as outfile:
+            outfile.write(json_object)
